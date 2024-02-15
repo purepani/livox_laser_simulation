@@ -32,7 +32,19 @@ catkin_package(
         CATKIN_DEPENDS tf
 )
 
-add_library(livox_laser_simulation SHARED src/livox_points_plugin.cpp src/livox_ode_multiray_shape.cpp)
+add_library(livox_laser_simulation SHARED livox_laser_simulation/livox_points_plugin.cpp livox_laser_simulation/livox_ode_multiray_shape.cpp)
 target_link_libraries(livox_laser_simulation ${catkin_LIBRARIES} RayPlugin)
 
 target_link_libraries(livox_laser_simulation libprotobuf.so.9)
+
+
+install(TARGETS ${PROJECT_NAME}
+	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+	)
+
+install(DIRECTORY
+  launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+	)
